@@ -1,0 +1,178 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import TradeList from "@/components/TradeList";
+import TradeForm from "@/components/TradeForm";
+import PerformanceMetrics from "@/components/PerformanceMetrics";
+import Portfolio from "@/components/Portfolio";
+import PerformanceTables from "@/components/PerformanceTables";
+import DonutChartRecharts from "@/components/DonutChart";
+import PortfolioValue from "@/components/PortfolioValue";
+import MaximumLossProfit from "@/components/MaximumLossProfit"; // Add this import
+import UseAllStrategiesDataWithTime from "@/components/UseAllStrategiesDataWithTime";
+import axios from "axios";
+
+import styles from "../css/HomePage.module.css";
+
+export default function HomePage() {
+  const [selectedStrategy, setSelectedStrategy] = useState("strategy1");
+  const [selectedTab, setSelectedTab] = useState("dataForm");
+  const [strategyData, setStrategyData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const { dates, strategies } = UseAllStrategiesDataWithTime();
+
+  useEffect(() => {
+    fetchDataForStrategy(selectedStrategy);
+  }, [selectedStrategy]);
+
+  const fetchDataForStrategy = async (strategy) => {
+    setIsLoading(true);
+    try {
+      const res = await axios.get(`/api/trades/${strategy}`);
+      setStrategyData(res.data);
+    } catch (err) {
+      console.error("Error fetching trade data:", err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const strategyOptions = [
+    { value: "strategy1", label: "Sniper NF" },
+    { value: "strategy2", label: "Prop Desk Ce-04" },
+    { value: "strategy3", label: "Prop Desk Ce-01" },
+    { value: "strategy4", label: "CE/PE" },
+    { value: "strategy5", label: "BTC Daily Option Selling with SL" },
+    { value: "strategy6", label: "Suprita" },
+    { value: "strategy7", label: "Shambhu" },
+    { value: "strategy8", label: "Mahabuddhi" },
+    { value: "strategy9", label: "Vasuki" },
+    { value: "strategy10", label: "OG BTC Daily Option Selling" },
+    { value: "strategy11", label: "VJS" },
+    { value: "strategy12", label: "SK" },
+    { value: "strategy13", label: "DNS" },
+    { value: "strategy14", label: "SIM" },
+  ];
+
+  return (
+    <div className={styles.container}>
+      {/* Header */}
+      <header className={styles.header}>
+        <div className={styles.headerContent}>
+          <h1 className={styles.title}>Portfolio Performance Dashboard</h1>
+          <nav className={styles.nav}>
+            <button
+              onClick={() => setSelectedTab("dashboard")}
+              className={`${styles.navButton} ${
+                selectedTab === "dashboard" ? styles.navButtonActive : ""
+              }`}
+            >
+              Dashboard
+            </button>
+            <button
+              onClick={() => setSelectedTab("dataForm")}
+              className={`${styles.navButton} ${
+                selectedTab === "dataForm" ? styles.navButtonActive : ""
+              }`}
+            >
+              Data Form
+            </button>
+          </nav>
+        </div>
+      </header>
+
+      <div className={styles.mainContent}>
+        {/* Strategy Selector */}
+        <div className={styles.strategySelector}>
+          <div className={styles.strategyHeader}>
+            <div>
+              <h2 className={styles.strategyTitle}>Select Trading Strategy</h2>
+              <p className={styles.strategyDescription}>
+                Choose a strategy to view or manage its trades
+              </p>
+            </div>
+            <div className={styles.selectContainer}>
+              <select
+                value={selectedStrategy}
+                onChange={(e) => setSelectedStrategy(e.target.value)}
+                className={styles.select}
+              >
+                {strategyOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+              <div className={styles.selectArrow}>
+                <svg
+                  className={styles.selectIcon}
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Content Area */}
+        <div className={styles.contentArea}>
+          {isLoading ? (
+            <div className={styles.loadingContainer}>
+              <div className={styles.spinner}></div>
+            </div>
+          ) : selectedTab === "dataForm" ? (
+            <TradeForm
+              onAddTrade={() => fetchDataForStrategy(selectedStrategy)}
+              selectedStrategy={selectedStrategy}
+            />
+          ) : (
+            <div>
+              <div className={styles.tradeListSection}>
+                <h2 className={styles.sectionTitle}>
+                  {strategyOptions.find((s) => s.value === selectedStrategy)
+                    ?.label || "Strategy"} Performance
+                </h2>
+                <TradeList
+                  trades={strategyData}
+                  selectedStrategy={selectedStrategy}
+                  setTrades={setStrategyData}
+                />
+                
+                {/* PerformanceMetrics and MaximumLossProfit components */}
+                <PerformanceMetrics trades={strategyData} />
+                <MaximumLossProfit trades={strategyData} />
+                <Portfolio investment = {20000} />
+                <PerformanceTables trades={strategyData} />
+                <DonutChartRecharts title={"All Strategies Data"} />
+            
+                 <PortfolioValue data={{dates, strategies }}/>
+
+
+
+              </div>
+
+              {/* Placeholder for future components */}
+              <div className={styles.placeholderGrid}>
+                <div className={styles.placeholderCard}>
+                  <h3 className={styles.placeholderTitle}>Portfolio Value</h3>
+                  <p className={styles.placeholderText}>Component coming soon...</p>
+                </div>
+                <div className={styles.placeholderCard}>
+                  <h3 className={styles.placeholderTitle}>Ranked Strategies</h3>
+                  <p className={styles.placeholderText}>Component coming soon...</p>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}

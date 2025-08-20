@@ -1,0 +1,166 @@
+/* Portfolio.module.css */
+
+.portfolioContainer {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e9ecef;
+}
+
+.title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin: 0 0 1.5rem 0;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #e2e8f0;
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.kpiBox {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 1.25rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+}
+
+.kpiBox:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.kpiBox.positive {
+  border-left: 4px solid #38a169;
+}
+
+.kpiBox.negative {
+  border-left: 4px solid #e53e3e;
+}
+
+.investmentKPI {
+  border-left: 4px solid #4299e1;
+}
+
+.portfolioValueKPI {
+  border-left: 4px solid #9f7aea;
+}
+
+.kpiLabel {
+  font-size: 0.9rem;
+  color: #718096;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.75rem;
+}
+
+.kpiValue {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2d3748;
+}
+
+.positiveValue {
+  color: #38a169;
+}
+
+.negativeValue {
+  color: #e53e3e;
+}
+
+/* Strategy Breakdown */
+.strategyBreakdown {
+  margin-top: 2rem;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0 0 1rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.strategyGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 0.75rem;
+}
+
+.strategyKpi {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8fafc;
+  padding: 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  transition: background-color 0.2s;
+}
+
+.strategyKpi:hover {
+  background-color: #edf2f7;
+}
+
+.strategyLabel {
+  font-size: 0.8rem;
+  color: #4a5568;
+  font-weight: 500;
+}
+
+.strategyValue {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .strategyGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .portfolioContainer {
+    padding: 1rem;
+  }
+  
+  .title {
+    font-size: 1.4rem;
+  }
+  
+  .kpiValue {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .strategyGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .strategyKpi {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+}

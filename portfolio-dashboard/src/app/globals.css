@@ -1,0 +1,54 @@
+/* src/app/globals.css */
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  background: #f7f9fc;
+  color: #111827;
+}
+
+nav {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+nav a {
+  margin-right: 12px;
+  color: #2563eb;
+  text-decoration: none;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+
+/* Global styles for react-calendar-heatmap */
+.react-calendar-heatmap {
+  width: 100%;
+}
+
+.react-calendar-heatmap text {
+  font-size: 10px;
+  fill: #718096;
+}
+
+.react-calendar-heatmap .react-calendar-heatmap-small-text {
+  font-size: 8px;
+}
+
+.react-calendar-heatmap rect:hover {
+  stroke: #4a5568;
+  stroke-width: 1px;
+}
+
+/* Override weekday labels */
+.react-calendar-heatmap .react-calendar-heatmap-weekday-label {
+  font-size: 9px;
+  fill: #718096;
+}
