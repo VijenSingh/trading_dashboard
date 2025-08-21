@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import TradeList from "@/components/TradeList";
+import StrategyPerformanceChart from "@/components/StrategyPerformanceChart";
 import TradeForm from "@/components/TradeForm";
 import PerformanceMetrics from "@/components/PerformanceMetrics";
 import Portfolio from "@/components/Portfolio";
@@ -36,6 +37,31 @@ export default function HomePage() {
       setIsLoading(false);
     }
   };
+
+    // new 
+
+    // Calculate Profit/Loss + Cumulative P&L
+  const calculateCumulativePL = () => {
+    let cumulativePL = 0;
+    return strategyData.map((trade) => {
+      const profitLoss = parseFloat(
+        ((trade.exitPrice - trade.entryPrice) * parseInt(trade.quantity)).toFixed(2)
+      );
+      cumulativePL += profitLoss;
+      return { ...trade, profitLoss, cumulativePL };
+    });
+  };
+
+  const tradesWithCumulativePL = calculateCumulativePL();
+
+  // Equity data for chart
+  const equityData = tradesWithCumulativePL.map((trade) => ({
+    date: trade.date,
+    cumulativePL: trade.cumulativePL,
+  }));
+
+    //end 
+
 
   const strategyOptions = [
     { value: "strategy1", label: "Sniper NF" },
@@ -144,6 +170,8 @@ export default function HomePage() {
                   selectedStrategy={selectedStrategy}
                   setTrades={setStrategyData}
                 />
+
+                <StrategyPerformanceChart equityData={equityData} />
                 
                 {/* PerformanceMetrics and MaximumLossProfit components */}
                 <PerformanceMetrics trades={strategyData} />

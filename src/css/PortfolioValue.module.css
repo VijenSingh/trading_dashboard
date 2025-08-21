@@ -1,36 +1,64 @@
 .container {
+  padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.cardHeader {
+  padding: 24px;
+  border-bottom: 1px solid #eaeaea;
+  background: linear-gradient(120deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.cardBody {
+  padding: 24px;
+  position: relative;
+  min-height: 500px;
+}
+
+.cardFooter {
+  padding: 16px 24px;
+  background: #f8f9fa;
+  border-top: 1px solid #eaeaea;
 }
 
 .title {
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 700;
+  color: #2c3e50;
   margin-bottom: 8px;
-  color: #333;
 }
 
 .subtitle {
   font-size: 16px;
-  color: #666;
-  margin-bottom: 24px;
+  color: #7f8c8d;
+  margin-bottom: 16px;
 }
 
 .yearSelector {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 20px;
 }
 
 .yearSelector button {
-  background: #f0f0f0;
+  background: #fff;
   border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 4px 8px;
+  border-radius: 6px;
+  padding: 6px 12px;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.yearSelector button:hover {
+  background: #f0f0f0;
 }
 
 .yearSelector span {
@@ -41,13 +69,12 @@
 
 .heatmapContainer {
   position: relative;
-  margin-bottom: 40px;
 }
 
 .weekdayLabels {
   display: flex;
-  margin-left: 40px;
-  margin-bottom: 8px;
+  margin-left: 60px;
+  margin-bottom: 12px;
 }
 
 .weekdayLabel {
@@ -55,39 +82,55 @@
   height: 20px;
   text-align: center;
   font-size: 11px;
-  color: #666;
+  color: #6c757d;
   margin: 0 2px;
+  font-weight: 500;
 }
 
 .monthlyGrids {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 24px;
 }
 
-.monthContainer {
+.monthCard {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: #fff;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.monthCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .monthHeader {
+  margin-bottom: 12px;
+}
+
+.monthName {
   font-weight: 600;
-  margin-bottom: 8px;
-  color: #333;
+  color: #2c3e50;
   font-size: 14px;
 }
 
 .calendarGrid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 2px;
+  gap: 3px;
+  margin-bottom: 12px;
 }
 
 .day {
-  width: 28px;
-  height: 28px;
-  border-radius: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
   background-color: #f0f0f0;
   cursor: pointer;
   transition: transform 0.1s ease;
@@ -99,44 +142,54 @@
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
 }
 
-.monthReturn {
-  margin-top: 8px;
-  font-size: 12px;
+.monthStats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.monthPL {
   font-weight: 600;
-  color: #333;
-  text-align: center;
-  min-height: 18px;
+  font-size: 14px;
+}
+
+.positivePL {
+  color: #28a745;
+}
+
+.negativePL {
+  color: #dc3545;
 }
 
 .tooltip {
-  position: fixed;
-  background: #333;
+  position: absolute;
+  background: rgba(44, 62, 80, 0.95);
   color: white;
-  padding: 8px 12px;
-  border-radius: 4px;
+  padding: 10px 14px;
+  border-radius: 6px;
   font-size: 14px;
   pointer-events: none;
   z-index: 100;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: opacity 0.3s;
 }
 
-.tooltip::after {
-  content: '';
-  position: absolute;
-  top: -5px;
-  left: -5px;
-  width: 10px;
-  height: 10px;
-  background: #333;
-  transform: rotate(45deg);
-  z-index: -1;
+.tooltipDate {
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #fff;
+}
+
+.tooltipValue {
+  font-weight: 500;
+  color: #f8f9fa;
 }
 
 .legend {
   display: flex;
   justify-content: center;
   gap: 24px;
-  margin-top: 20px;
 }
 
 .legendItem {
@@ -144,12 +197,13 @@
   align-items: center;
   gap: 8px;
   font-size: 14px;
+  color: #6c757d;
 }
 
 .colorPositive, .colorNegative, .colorEmpty {
   width: 16px;
   height: 16px;
-  border-radius: 2px;
+  border-radius: 3px;
 }
 
 .colorPositive {
@@ -165,24 +219,36 @@
   border: 1px solid #ddd;
 }
 
+@media (max-width: 1024px) {
+  .monthlyGrids {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
   .monthlyGrids {
+    grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
   
-  .day {
-    width: 20px;
-    height: 20px;
+  .monthCard {
+    padding: 8px;
   }
   
-  .weekdayLabel {
-    width: 20px;
-    font-size: 9px;
+  .day {
+    width: 16px;
+    height: 16px;
   }
   
   .legend {
     flex-direction: column;
     align-items: center;
     gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .monthlyGrids {
+    grid-template-columns: 1fr;
   }
 }

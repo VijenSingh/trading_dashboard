@@ -1,18 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import EquityCurveChart from "@/components/EquityCurveChart";
-
 import styles from "../css/tradeList.module.css";
 
 function TradeList({ trades, selectedStrategy, setTrades }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editTrade, setEditTrade] = useState(null);
 
+  // Sort trades by date in ascending order
+  const sortedTrades = useMemo(() => {
+    return [...trades].sort((a, b) => new Date(a.date) - new Date(b.date));
+  }, [trades]);
+
   // Calculate Profit/Loss + Cumulative P&L
   const calculateCumulativePL = () => {
     let cumulativePL = 0;
-    return trades.map((trade) => {
+    return sortedTrades.map((trade) => {
       const profitLoss = parseFloat(
         ((trade.exitPrice - trade.entryPrice) * parseInt(trade.quantity)).toFixed(2)
       );
@@ -23,7 +27,7 @@ function TradeList({ trades, selectedStrategy, setTrades }) {
 
   const tradesWithCumulativePL = calculateCumulativePL();
 
-  // Equity data for chart
+  // Equity data for chart - already sorted by date
   const equityData = tradesWithCumulativePL.map((trade) => ({
     date: trade.date,
     cumulativePL: trade.cumulativePL,
@@ -139,7 +143,7 @@ function TradeList({ trades, selectedStrategy, setTrades }) {
         <table className={styles.tradeTable}>
           <thead>
             <tr>
-              <th>Date</th>
+              <th>Date ↗</th>
               <th>Entry Price</th>
               <th>Exit Price</th>
               <th>Quantity</th>
@@ -152,12 +156,12 @@ function TradeList({ trades, selectedStrategy, setTrades }) {
             {currentTrades.length > 0 ? (
               currentTrades.map((trade) => (
                 <tr key={trade._id}>
-                  <td>{trade.date}</td>
+                  <td>{new Date(trade.date).toLocaleDateString('en-GB')}</td>
                   <td>{trade.entryPrice}</td>
                   <td>{trade.exitPrice}</td>
                   <td>{trade.quantity}</td>
                   <td className={trade.profitLoss >= 0 ? styles.profit : styles.loss}>
-                    {trade.profitLoss}
+                    {trade.profitLoss >= 0 ? '+' : ''}{trade.profitLoss}
                   </td>
                   <td>{trade.cumulativePL.toFixed(2)}</td>
                   <td>
