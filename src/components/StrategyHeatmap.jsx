@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import styles from "../css/StrategyHeatmap.module.css";
+import useStrategyName from "@/components/useStrategyName";
 
 const daysInMonth = (year, month) => new Date(year, month, 0).getDate();
 
@@ -12,6 +13,9 @@ const StrategyHeatmap = ({ data, strategy, years }) => {
 
   // Filter data for this strategy
   const strategyData = data.filter((d) => d.strategy === strategy);
+
+  const strategyName = useStrategyName(strategy);
+  
 
   // Group by date
   const pnlByDate = {};
@@ -30,7 +34,7 @@ const StrategyHeatmap = ({ data, strategy, years }) => {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>{strategy} - Heatmap</h2>
+      <h2 className={styles.title}>{strategyName} - Heatmap</h2>
 
       {/* 🔹 Year Tabs */}
       <div className={styles.yearTabs}>
