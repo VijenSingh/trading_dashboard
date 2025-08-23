@@ -1,0 +1,140 @@
+/* Container */
+.container {
+  padding: 20px;
+}
+
+/* Title */
+.title {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Year Tabs */
+.yearTabs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.yearTab {
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #f8f8f8;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.yearTab:hover {
+  background: #eaeaea;
+}
+
+.activeTab {
+  background: #0070f3;
+  color: white;
+  border-color: #0070f3;
+  font-weight: bold;
+}
+
+/* Heatmap Grid (all months) */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+/* Month Card */
+.monthCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  min-height: 240px; /* consistent look */
+}
+
+/* Month Label */
+.monthLabel {
+  font-weight: bold;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+/* Days Grid */
+.daysGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* exactly 7 columns */
+  gap: 4px;
+  width: 100%;       /* ensure full width */
+  box-sizing: border-box;
+}
+
+/* Day Cell */
+.dayCell {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* perfect square */
+  border-radius: 4px;
+  position: relative;
+  cursor: pointer;
+  flex-shrink: 0;     /* stop shrinking */
+}
+
+/* Tooltip */
+.tooltip {
+  visibility: hidden;
+  width: max-content;
+  background-color: rgba(0,0,0,0.8);
+  color: #fff;
+  text-align: center;
+  padding: 4px 8px;
+  border-radius: 4px;
+  position: absolute;
+  z-index: 10;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.dayCell:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Colors */
+.noData {
+  background: #f0f0f0;
+}
+
+.profit {
+  background: #4caf50; /* green */
+}
+
+.loss {
+  background: #f44336; /* red */
+}
+
+/* Month Totals */
+.monthProfit,
+.monthLoss {
+  font-weight: bold;
+  text-align: center;
+}
+
+.monthProfit {
+  color: green;
+}
+
+.monthLoss {
+  color: red;
+}

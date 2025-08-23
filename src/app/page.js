@@ -11,9 +11,12 @@ import DonutChartRecharts from "@/components/DonutChart";
 import PortfolioValue from "@/components/PortfolioValue";
 import MaximumLossProfit from "@/components/MaximumLossProfit"; // Add this import
 import UseAllStrategiesDataWithTime from "@/components/UseAllStrategiesDataWithTime";
+import RankedStrategies from "@/components/RankedStrategies";
 import axios from "axios";
 
 import styles from "../css/HomePage.module.css";
+import PortfolioHeatmap from "@/components/PortfolioHeatmap";
+import StrategyHeatmap from "@/components/StrategyHeatmap";
 
 export default function HomePage() {
   const [selectedStrategy, setSelectedStrategy] = useState("strategy1");
@@ -179,8 +182,13 @@ export default function HomePage() {
                 <Portfolio investment = {20000} />
                 <PerformanceTables trades={strategyData} />
                 <DonutChartRecharts title={"All Strategies Data"} />
-            
-                 <PortfolioValue data={{dates, strategies }}/>
+                    <RankedStrategies/>
+                    {/* <PortfolioHeatmap strategy = {selectedStrategy} /> */}
+                    <StrategyHeatmap  data={strategyData}
+                  strategy={selectedStrategy} 
+                  years={[2020, 2021, 2022, 2023, 2024, 2025]}
+                  />
+                 {/* <PortfolioValue data={{dates, strategies }}/> */}
 
 
 

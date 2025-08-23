@@ -1,0 +1,60 @@
+.container {
+  margin: 20px 0;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 18px);
+  gap: 4px;
+  justify-content: flex-start;
+}
+
+.cell {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.cell:hover {
+  transform: scale(1.2);
+  border: 1px solid #444;
+}
+
+.monthlyRow {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 12px;
+  font-size: 14px;
+  gap: 8px;
+  justify-content: center;
+}
+
+.monthCell {
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: #f9f9f9;
+}
+
+.profit {
+  color: green;
+  font-weight: 600;
+}
+
+.loss {
+  color: red;
+  font-weight: 600;
+}
