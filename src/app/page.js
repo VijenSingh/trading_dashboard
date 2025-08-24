@@ -179,7 +179,7 @@ export default function HomePage() {
                 {/* PerformanceMetrics and MaximumLossProfit components */}
                 <PerformanceMetrics trades={strategyData} />
                 <MaximumLossProfit trades={strategyData} />
-                <Portfolio investment = {20000} />
+                <Portfolio investment = {40000} />
                 <PerformanceTables trades={strategyData} />
                 <DonutChartRecharts title={"All Strategies Data"} />
                     <RankedStrategies/>

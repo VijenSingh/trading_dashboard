@@ -223,7 +223,7 @@ function StrategyPerformanceChart({ equityData }) {
               stroke="#FF7C00"
               strokeWidth={2}
               dot={false}
-              strokeDasharray="3 3"
+              // strokeDasharray="3 3"
               name="5-Day MA"
             />
             <Line
@@ -232,7 +232,7 @@ function StrategyPerformanceChart({ equityData }) {
               stroke="#00A86B"
               strokeWidth={2}
               dot={false}
-              strokeDasharray="4 4"
+              // strokeDasharray="4 4"
               name="10-Day MA"
             />
             <Line
@@ -241,7 +241,7 @@ function StrategyPerformanceChart({ equityData }) {
               stroke="#9F2B68"
               strokeWidth={2}
               dot={false}
-              strokeDasharray="5 5"
+              // strokeDasharray="5 5"
               name="20-Day MA"
             />
           </LineChart>
