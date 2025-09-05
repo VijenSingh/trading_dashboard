@@ -52,6 +52,7 @@ const DonutChartRecharts = ({ title }) => {
     originalValue: Number(data[key]),
   }));
 
+  console.log("55=> ", data)
   const totalValue = chartData.reduce((sum, item) => sum + item.value, 0);
 
   const CustomTooltip = ({ active, payload }) => {

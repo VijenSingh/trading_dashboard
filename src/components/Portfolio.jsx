@@ -60,16 +60,16 @@ const Portfolio = ({ investment }) => {
       <div className={styles.strategyBreakdown}>
         <h3 className={styles.subtitle}>Strategy Performance</h3>
         <div className={styles.strategyGrid}>
-          <StrategyKPI label="Sniper NF" value={data.Sniper_NF} />
-          <StrategyKPI label="Prop Desk Ce-04" value={data.Prop_Desk_Ce_04} />
-          <StrategyKPI label="Prop Desk Ce-01" value={data.Prop_Desk_Ce_01} />
-          <StrategyKPI label="CE/PE" value={data.CE_PE} />
-          <StrategyKPI label="Range Breakout" value={data.Range_Breakout} />
-          <StrategyKPI label="Suprita" value={data.Suprita} />
-          <StrategyKPI label="Shambhu" value={data.Shambhu} />
-          <StrategyKPI label="Mahabuddhi" value={data.Mahabuddhi} />
-          <StrategyKPI label="Vasuki" value={data.Vasuki} />
-          <StrategyKPI label="NF Selling Long Term" value={data.NF_Selling_Long_Term} />
+          <StrategyKPI label="Sniper BTC with SL Day Wise" value={data.Sniper_NF} />
+          <StrategyKPI label="Sniper BTC with SL" value={data.Prop_Desk_Ce_04} />
+          <StrategyKPI label="ETH Selling" value={data.Prop_Desk_Ce_01} />
+          <StrategyKPI label="ETH Selling Day wise" value={data.CE_PE} />
+          <StrategyKPI label="ETH Selling without SL" value={data.Range_Breakout} />
+          <StrategyKPI label="ETH Selling without SL Day wise" value={data.Suprita} />
+          <StrategyKPI label="3PM ETH Shambhu" value={data.Shambhu} />
+          <StrategyKPI label="3PM ETH Shambhu Day wise" value={data.Mahabuddhi} />
+          <StrategyKPI label="3PM ETH Vasuki without SL" value={data.Vasuki} />
+          <StrategyKPI label="3PM ETH Vasuki without SL Day wise" value={data.NF_Selling_Long_Term} />
           <StrategyKPI label="VJS" value={data.VJS} />
           <StrategyKPI label="SK" value={data.SK} />
           <StrategyKPI label="DNS" value={data.DNS} />
