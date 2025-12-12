@@ -1,0 +1,3 @@
+ALLOWED_ORIGINS='https://theluxurycloset.com,https://vaaree.com,https://www.000webhost.com,https://www.snitch.co.in'
+PORT='3000'
+MONGO_URI="mongodb+srv://vijju:vijju123@cluster0.vqv6fct.mongodb.net/trading_dashboard?retryWrites=true&w=majority&appName=Cluster0"

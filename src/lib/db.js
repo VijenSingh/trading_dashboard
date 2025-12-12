@@ -6,7 +6,7 @@ export const connectDB = async () => {
   if (isConnected) return;
   try {
     if (!process.env.MONGO_URI) throw new Error("MONGO_URI not defined");
-    await mongoose.connect(process.env.MONGO_URI, { dbName: "trading_dashboard" });
+    await mongoose.connect(process.env.MONGO_URI);
     isConnected = true;
     console.log("MongoDB connected successfully");
   } catch (err) {

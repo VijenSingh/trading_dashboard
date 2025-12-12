@@ -12,6 +12,8 @@
     "axios": "^1.11.0",
     "framer-motion": "^12.23.12",
     "lucide-react": "^0.541.0",
+    "mongodb": "^7.0.0",
+    "mongoos": "^0.0.1-security",
     "mongoose": "^8.17.2",
     "next": "15.5.9",
     "react": "19.1.0",
