@@ -95,7 +95,7 @@ function StrategyPerformanceChart({ equityData }) {
                   style={{ backgroundColor: entry.color }}
                 ></span>
                 <span className="font-medium">{entry.name}:</span>
-                <span className="ml-1">₹{entry.value.toFixed(2)}</span>
+                <span className="ml-1">${entry.value.toFixed(2)}</span>
               </p>
             ))}
           </div>
@@ -199,7 +199,7 @@ function StrategyPerformanceChart({ equityData }) {
             />
             <YAxis
               tick={{ fontSize: 12, fill: "#6B7280" }}
-              tickFormatter={(val) => `₹${val}`}
+              tickFormatter={(val) => `$${val}`}
             />
             <Tooltip content={<CustomTooltip />} />
             <Legend 

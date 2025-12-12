@@ -86,7 +86,7 @@ const StrategyHeatmap = ({ data, strategy, years }) => {
                       {/* Tooltip */}
                       <span className={styles.tooltip}>
                         {pnl !== 0
-                          ? `${dateStr} → ₹${pnl.toFixed(2)}`
+                          ? `${dateStr} → $${pnl.toFixed(2)}`
                           : `${dateStr} → No Trades`}
                       </span>
                     </div>
@@ -100,7 +100,7 @@ const StrategyHeatmap = ({ data, strategy, years }) => {
                     : styles.monthLoss
                 }
               >
-                ₹{(monthlySummary[monthStr] || 0).toFixed(2)}
+                ${(monthlySummary[monthStr] || 0).toFixed(2)}
               </p>
             </div>
           );

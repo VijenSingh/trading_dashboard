@@ -114,7 +114,7 @@ const PerformanceTables = ({ trades }) => {
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="month" />
               <YAxis />
-              <Tooltip formatter={(value) => [`₹${value}`, "Value"]} />
+              <Tooltip formatter={(value) => [`$${value}`, "Value"]} />
               <Bar dataKey="totalReturn">
                 {monthData.map((entry, index) => (
                   <Cell
@@ -163,7 +163,7 @@ const PerformanceTables = ({ trades }) => {
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="day" />
               <YAxis />
-              <Tooltip formatter={(value) => [`₹${value}`, "Value"]} />
+              <Tooltip formatter={(value) => [`$${value}`, "Value"]} />
               <Bar dataKey="totalReturn">
                 {dayData.map((entry, index) => (
                   <Cell

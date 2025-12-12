@@ -61,7 +61,7 @@ const DonutChartRecharts = ({ title }) => {
       return (
         <div className={styles.tooltip}>
           <p className={styles.tooltipLabel}>{d.name}</p>
-          <p className={styles.tooltipValue}>₹{d.originalValue.toFixed(2)}</p>
+          <p className={styles.tooltipValue}>${d.originalValue.toFixed(2)}</p>
           <p className={styles.tooltipPercentage}>
             {((d.value / totalValue) * 100).toFixed(1)}% of total
           </p>
@@ -138,7 +138,7 @@ const DonutChartRecharts = ({ title }) => {
               dominantBaseline="middle"
               className={styles.centerText}
             >
-              ₹{totalValue.toFixed(0)}
+              ${totalValue.toFixed(0)}
             </text>
           </PieChart>
         </ResponsiveContainer>

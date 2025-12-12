@@ -23,11 +23,11 @@ export default function PerformanceMetrics({ trades }) {
           <div className={styles.metricLabel}>Total Trades</div>
         </div>
         <div className={`${styles.metricCard} ${totalProfit >= 0 ? styles.profit : styles.loss}`}>
-          <div className={styles.metricValue}>₹{totalProfit.toFixed(2)}</div>
+          <div className={styles.metricValue}>${totalProfit.toFixed(2)}</div>
           <div className={styles.metricLabel}>Total P&L</div>
         </div>
         <div className={styles.metricCard}>
-          <div className={styles.metricValue}>₹{avgProfit.toFixed(2)}</div>
+          <div className={styles.metricValue}>${avgProfit.toFixed(2)}</div>
           <div className={styles.metricLabel}>Avg. Profit/Trade</div>
         </div>
         <div className={styles.metricCard}>

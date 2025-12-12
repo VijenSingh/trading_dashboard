@@ -34,18 +34,18 @@ const Portfolio = ({ investment }) => {
       <div className={styles.grid}>
         <KPI 
           label="Total Investment" 
-          value={`₹ ${investment.toFixed(2)}`} 
+          value={`$ ${investment.toFixed(2)}`} 
           className={styles.investmentKPI}
         />
         <KPI 
           label="Total Profit/Loss" 
-          value={`₹ ${totalProfitLoss.toFixed(2)}`} 
+          value={`$ ${totalProfitLoss.toFixed(2)}`} 
           positive={isPositive}
           negative={!isPositive}
         />
         <KPI 
           label="Portfolio Value" 
-          value={`₹ ${(investment + totalProfitLoss).toFixed(2)}`} 
+          value={`$ ${(investment + totalProfitLoss).toFixed(2)}`} 
           className={styles.portfolioValueKPI}
         />
         <KPI 
@@ -97,7 +97,7 @@ function StrategyKPI({ label, value }) {
     <div className={styles.strategyKpi}>
       <span className={styles.strategyLabel}>{label}</span>
       <span className={`${styles.strategyValue} ${isPositive ? styles.positiveValue : styles.negativeValue}`}>
-        ₹{value.toFixed(2)}
+        ${value.toFixed(2)}
       </span>
     </div>
   );

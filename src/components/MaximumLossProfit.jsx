@@ -144,11 +144,11 @@ export default function MaximumLossProfit({ trades }) {
           <h4>Profit/Loss Analysis</h4>
           <div className={styles.metricRow}>
             <span>Max Profit:</span>
-            <span className={styles.positive}>₹{maxProfit.toFixed(2)}</span>
+            <span className={styles.positive}>${maxProfit.toFixed(2)}</span>
           </div>
           <div className={styles.metricRow}>
             <span>Max Loss:</span>
-            <span className={styles.negative}>₹{maxLoss.toFixed(2)}</span>
+            <span className={styles.negative}>${maxLoss.toFixed(2)}</span>
           </div>
           <div className={styles.metricRow}>
             <span>Profit Trades:</span>
@@ -164,11 +164,11 @@ export default function MaximumLossProfit({ trades }) {
           <h4>Drawdown Analysis</h4>
           <div className={styles.metricRow}>
             <span>Peak Value:</span>
-            <span>₹{peakValue.toFixed(2)}</span>
+            <span>${peakValue.toFixed(2)}</span>
           </div>
           <div className={styles.metricRow}>
             <span>Max Drawdown:</span>
-            <span className={styles.negative}>₹{maxDrawdownValue.toFixed(2)}</span>
+            <span className={styles.negative}>${maxDrawdownValue.toFixed(2)}</span>
           </div>
           <div className={styles.metricRow}>
             <span>Drawdown %:</span>
@@ -212,7 +212,7 @@ export default function MaximumLossProfit({ trades }) {
               <XAxis dataKey="i" />
               <YAxis />
               <CartesianGrid strokeDasharray="3 3" />
-              <Tooltip formatter={(value) => [`₹${value}`, "Value"]} />
+              <Tooltip formatter={(value) => [`$${value}`, "Value"]} />
 
               {/* Drawdown area */}
               <Area

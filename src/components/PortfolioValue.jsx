@@ -173,7 +173,7 @@ const PortfolioValue = ({ data }) => {
                             '#f0f0f0'
                         }}
                         onMouseMove={(e) => handleDayHover(day, e)}
-                        title={day.date && day.value !== null ? `${day.date}: ₹${day.value?.toFixed(2)}` : 'No data'}
+                        title={day.date && day.value !== null ? `${day.date}: $${day.value?.toFixed(2)}` : 'No data'}
                       />
                     ))}
                   </div>
@@ -181,7 +181,7 @@ const PortfolioValue = ({ data }) => {
                   <div className={styles.monthStats}>
                     <div className={`${styles.monthPL} ${month.pl >= 0 ? styles.positivePL : styles.negativePL}`}>
                       {month.pl !== undefined && month.pl !== null ? 
-                        `₹${month.pl >= 0 ? '+' : ''}${month.pl.toFixed(2)}` : 
+                        `$${month.pl >= 0 ? '+' : ''}${month.pl.toFixed(2)}` : 
                         'No data'}
                     </div>
                   </div>
@@ -198,7 +198,7 @@ const PortfolioValue = ({ data }) => {
             >
               <div className={styles.tooltipDate}>{selectedDate.date}</div>
               <div className={styles.tooltipValue}>
-                {selectedDate.value !== null ? `₹${selectedDate.value?.toFixed(2)}` : 'No data'}
+                {selectedDate.value !== null ? `$${selectedDate.value?.toFixed(2)}` : 'No data'}
               </div>
             </div>
           )}

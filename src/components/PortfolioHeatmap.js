@@ -25,7 +25,7 @@ const PortfolioHeatmap = ({ strategy }) => {
           <div
             key={day.date}
             className={styles.cell}
-            title={`${day.date}: ₹${day.pl.toFixed(2)}`}
+            title={`${day.date}: $${day.pl.toFixed(2)}`}
             style={{ backgroundColor: getColor(day.pl) }}
           ></div>
         ))}
@@ -35,7 +35,7 @@ const PortfolioHeatmap = ({ strategy }) => {
         {Object.entries(monthlyTotals).map(([month, total]) => (
           <div key={month} className={styles.monthCell}>
             {month}: <span className={total >= 0 ? styles.profit : styles.loss}>
-              ₹{total.toFixed(2)}
+              ${total.toFixed(2)}
             </span>
           </div>
         ))}
