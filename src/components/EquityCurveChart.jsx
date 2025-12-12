@@ -43,10 +43,10 @@ function EquityCurveChart({ equityData }) {
             />
             <YAxis
               tick={{ fontSize: 12, fill: "#6B7280" }}
-              tickFormatter={(val) => `₹${val}`}
+              tickFormatter={(val) => `$${val}`}
             />
             <Tooltip
-              formatter={(value) => [`₹${value}`, "Cumulative P/L"]}
+              formatter={(value) => [`$${value}`, "Cumulative P/L"]}
               labelFormatter={(label) =>
                 `Date: ${new Date(label).toLocaleDateString("en-GB")}`
               }

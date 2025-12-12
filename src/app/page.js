@@ -186,7 +186,7 @@ export default function HomePage() {
                     {/* <PortfolioHeatmap strategy = {selectedStrategy} /> */}
                     <StrategyHeatmap  data={strategyData}
                   strategy={selectedStrategy} 
-                  years={[2020, 2021, 2022, 2023, 2024, 2025]}
+                  years={[ 2023,2024,2025,2026,2027,2028]}
                   />
                  {/* <PortfolioValue data={{dates, strategies }}/> */}
 
