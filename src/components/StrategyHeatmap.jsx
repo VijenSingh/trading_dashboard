@@ -11,13 +11,10 @@ const StrategyHeatmap = ({ data, strategy, years }) => {
     years.includes(currentYear) ? currentYear : years[0]
   );
 
-  // Filter data for this strategy
   const strategyData = data.filter((d) => d.strategy === strategy);
-
   const strategyName = useStrategyName(strategy);
-  
 
-  // Group by date
+  // Group by date → PnL
   const pnlByDate = {};
   strategyData.forEach((trade) => {
     const date = trade.date;
@@ -25,18 +22,31 @@ const StrategyHeatmap = ({ data, strategy, years }) => {
     pnlByDate[date] = (pnlByDate[date] || 0) + pnl;
   });
 
-  // Group monthly summary
-  const monthlySummary = {};
+  // Monthly stats
+  const monthlyStats = {};
+
   Object.keys(pnlByDate).forEach((date) => {
     const month = date.slice(0, 7); // YYYY-MM
-    monthlySummary[month] = (monthlySummary[month] || 0) + pnlByDate[date];
+    const pnl = pnlByDate[date];
+
+    if (!monthlyStats[month]) {
+      monthlyStats[month] = {
+        totalPnl: 0,
+        win: 0,
+        loss: 0,
+      };
+    }
+
+    monthlyStats[month].totalPnl += pnl;
+    if (pnl > 0) monthlyStats[month].win++;
+    if (pnl < 0) monthlyStats[month].loss++;
   });
 
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>{strategyName} - Heatmap</h2>
 
-      {/* 🔹 Year Tabs */}
+      {/* Year Tabs */}
       <div className={styles.yearTabs}>
         {years.map((year) => (
           <button
@@ -51,14 +61,22 @@ const StrategyHeatmap = ({ data, strategy, years }) => {
         ))}
       </div>
 
-      {/* 🔹 Heatmap Grid */}
       <div className={styles.grid}>
         {Array.from({ length: 12 }, (_, monthIdx) => {
           const month = monthIdx + 1;
           const monthStr = `${selectedYear}-${month
             .toString()
             .padStart(2, "0")}`;
+
           const days = daysInMonth(selectedYear, month);
+
+          const win = monthlyStats[monthStr]?.win || 0;
+          const loss = monthlyStats[monthStr]?.loss || 0;
+          const total = win + loss;
+
+          const winRate = total > 0 ? ((win / total) * 100).toFixed(1) : 0;
+
+          const totalPnl = monthlyStats[monthStr]?.totalPnl || 0;
 
           return (
             <div key={month} className={styles.monthCard}>
@@ -67,11 +85,13 @@ const StrategyHeatmap = ({ data, strategy, years }) => {
                   month: "short",
                 })}
               </h4>
+
               <div className={styles.daysGrid}>
                 {Array.from({ length: days }, (_, day) => {
                   const dateStr = `${monthStr}-${(day + 1)
                     .toString()
                     .padStart(2, "0")}`;
+
                   const pnl = pnlByDate[dateStr] || 0;
 
                   let cellClass = styles.noData;
@@ -83,7 +103,6 @@ const StrategyHeatmap = ({ data, strategy, years }) => {
                       key={dateStr}
                       className={`${styles.dayCell} ${cellClass}`}
                     >
-                      {/* Tooltip */}
                       <span className={styles.tooltip}>
                         {pnl !== 0
                           ? `${dateStr} → $${pnl.toFixed(2)}`
@@ -93,15 +112,19 @@ const StrategyHeatmap = ({ data, strategy, years }) => {
                   );
                 })}
               </div>
-              <p
-                className={
-                  monthlySummary[monthStr] >= 0
-                    ? styles.monthProfit
-                    : styles.monthLoss
-                }
-              >
-                ${(monthlySummary[monthStr] || 0).toFixed(2)}
-              </p>
+
+              {/* 📌 NEW STATS BELOW MONTH */}
+              <div className={styles.monthStats}>
+                <p>Wins: {win} | Loss: {loss}</p>
+                <p>Win Rate: {winRate}%</p>
+                <p
+                  className={
+                    totalPnl >= 0 ? styles.monthProfit : styles.monthLoss
+                  }
+                >
+                  ${totalPnl.toFixed(2)}
+                </p>
+              </div>
             </div>
           );
         })}

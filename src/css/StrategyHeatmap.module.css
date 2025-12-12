@@ -138,3 +138,11 @@
 .monthLoss {
   color: red;
 }
+
+
+.monthStats {
+  text-align: center;
+  margin-top: 6px;
+  font-size: 13px;
+  line-height: 1.3;
+}
