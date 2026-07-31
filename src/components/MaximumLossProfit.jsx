@@ -14,10 +14,7 @@ import {
 import styles from "../css/MaximumLossProfit.module.css";
 
 export default function MaximumLossProfit({ trades }) {
-  if (!trades || trades.length === 0) {
-    return <p className={styles.noData}>No trades to display max loss/profit.</p>;
-  }
-
+  const safeTrades = trades ?? [];
   const pl = (t) => (t.exitPrice - t.entryPrice) * t.quantity;
 
   const {
@@ -30,9 +27,22 @@ export default function MaximumLossProfit({ trades }) {
     winningStreak,
     losingStreak,
   } = useMemo(() => {
+    if (safeTrades.length === 0) {
+      return {
+        equityData: [],
+        peakValue: 0,
+        maxDrawdownValue: 0,
+        maxDrawdownPct: 0,
+        ddStartIndex: 0,
+        ddEndIndex: 0,
+        winningStreak: 0,
+        losingStreak: 0,
+      };
+    }
+
     // Build cumulative equity
     let cumulative = 0;
-    const equity = trades.map((t, i) => {
+    const equity = safeTrades.map((t, i) => {
       const profit = pl(t);
       cumulative += profit;
       return { i, equity: cumulative };
@@ -54,7 +64,7 @@ export default function MaximumLossProfit({ trades }) {
     // Winning/Losing streaks
     let currentWin = 0, maxWin = 0;
     let currentLose = 0, maxLose = 0;
-    trades.forEach((t) => {
+    safeTrades.forEach((t) => {
       const p = pl(t);
       if (p > 0) {
         currentWin += 1;
@@ -120,13 +130,17 @@ export default function MaximumLossProfit({ trades }) {
       winningStreak: maxWin,
       losingStreak: maxLose,
     };
-  }, [trades]);
+  }, [safeTrades]);
+
+  if (safeTrades.length === 0) {
+    return <p className={styles.noData}>No trades to display max loss/profit.</p>;
+  }
 
   // Other summary stats
-  const maxProfit = Math.max(...trades.map(pl), 0);
-  const maxLoss = Math.min(...trades.map(pl), 0);
-  const profitTrades = trades.filter((t) => pl(t) > 0).length;
-  const losingTrades = trades.filter((t) => pl(t) < 0).length;
+  const maxProfit = Math.max(...safeTrades.map(pl), 0);
+  const maxLoss = Math.min(...safeTrades.map(pl), 0);
+  const profitTrades = safeTrades.filter((t) => pl(t) > 0).length;
+  const losingTrades = safeTrades.filter((t) => pl(t) < 0).length;
 
   // Chart data
   const chartData = equityData.map((d) => ({
@@ -188,7 +202,7 @@ export default function MaximumLossProfit({ trades }) {
           </div>
           <div className={styles.metricRow}>
             <span>Total Trades:</span>
-            <span>{trades.length}</span>
+            <span>{safeTrades.length}</span>
           </div>
         </div>
       </div>
@@ -200,25 +214,34 @@ export default function MaximumLossProfit({ trades }) {
             <AreaChart data={chartData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
               <defs>
                 <linearGradient id="colorEquity" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#4caf50" stopOpacity={0.8} />
-                  <stop offset="95%" stopColor="#4caf50" stopOpacity={0} />
+                  <stop offset="5%" stopColor="#22e06f" stopOpacity={0.8} />
+                  <stop offset="95%" stopColor="#22e06f" stopOpacity={0} />
                 </linearGradient>
                 <linearGradient id="colorDrawdown" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#f44336" stopOpacity={0.6} />
-                  <stop offset="95%" stopColor="#f44336" stopOpacity={0} />
+                  <stop offset="5%" stopColor="#ff5c68" stopOpacity={0.6} />
+                  <stop offset="95%" stopColor="#ff5c68" stopOpacity={0} />
                 </linearGradient>
               </defs>
 
-              <XAxis dataKey="i" />
-              <YAxis />
-              <CartesianGrid strokeDasharray="3 3" />
-              <Tooltip formatter={(value) => [`$${value}`, "Value"]} />
+              <XAxis dataKey="i" tick={{ fontSize: 12, fill: "#898781" }} />
+              <YAxis tick={{ fontSize: 12, fill: "#898781" }} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#2c2c2a" />
+              <Tooltip
+                formatter={(value) => [`$${value}`, "Value"]}
+                contentStyle={{
+                  backgroundColor: "rgba(20, 18, 30, 0.92)",
+                  borderRadius: "10px",
+                  border: "1px solid rgba(255,255,255,0.14)",
+                  color: "#ffffff",
+                }}
+                labelStyle={{ color: "#c3c2b7" }}
+              />
 
               {/* Drawdown area */}
               <Area
                 type="monotone"
                 dataKey="drawdown"
-                stroke="#f44336"
+                stroke="#ff5c68"
                 fill="url(#colorDrawdown)"
                 name="Drawdown"
               />
@@ -227,7 +250,7 @@ export default function MaximumLossProfit({ trades }) {
               <Line
                 type="monotone"
                 dataKey="equity"
-                stroke="#4caf50"
+                stroke="#22e06f"
                 strokeWidth={2}
                 dot={false}
                 name="Equity"
@@ -239,8 +262,8 @@ export default function MaximumLossProfit({ trades }) {
                   x1={ddStartIndex}
                   x2={ddEndIndex}
                   strokeOpacity={0.3}
-                  fill="#d32f2f"
-                  fillOpacity={0.2}
+                  fill="#ff5c68"
+                  fillOpacity={0.15}
                 />
               )}
             </AreaChart>

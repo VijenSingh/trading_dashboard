@@ -7,7 +7,7 @@ export async function GET(req, { params }) {
   await connectDB();
   try {
     const { strategy } = await params; // Await the params promise
-    const trades = await Trade.find({ strategy });
+    const trades = await Trade.find({ strategy }).sort({ date: 1 }).lean();
     return new Response(JSON.stringify(trades), { status: 200 });
   } catch (err) {
     console.error(err);

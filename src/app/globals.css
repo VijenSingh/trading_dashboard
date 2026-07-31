@@ -1,32 +1,90 @@
 /* src/app/globals.css */
+
+:root {
+  color-scheme: dark;
+
+  /* page */
+  --bg-page: #0a0a0f;
+  --bg-page-2: #14101f;
+
+  /* glass surfaces */
+  --surface-glass: rgba(38, 38, 54, 0.62);
+  --surface-glass-strong: rgba(44, 44, 62, 0.86);
+  --border-glass: rgba(255, 255, 255, 0.18);
+  --border-glass-strong: rgba(255, 255, 255, 0.3);
+  --blur-glass: blur(20px);
+  --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  --shadow-glass-lg: 0 20px 60px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+  /* ink */
+  --text-primary: #ffffff;
+  --text-secondary: #c3c2b7;
+  --text-muted: #898781;
+
+  /* accent */
+  --accent: #9085e9;
+  --accent-strong: #b0a6f7;
+  --accent-soft: rgba(144, 133, 233, 0.16);
+  --accent-blue: #3987e5;
+
+  /* status / P&L */
+  --profit: #0ca30c;
+  --profit-strong: #22e06f;
+  --profit-soft: rgba(34, 224, 111, 0.14);
+  --loss: #e66767;
+  --loss-strong: #ff5c68;
+  --loss-soft: rgba(255, 92, 104, 0.14);
+
+  /* chart chrome */
+  --grid-line: #2c2c2a;
+  --axis-line: #383835;
+
+  /* radii */
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+}
+
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
-  background: #f7f9fc;
-  color: #111827;
-}
-
-nav {
-  padding: 12px;
-  border-bottom: 1px solid #eee;
-}
-
-nav a {
-  margin-right: 12px;
-  color: #2563eb;
-  text-decoration: none;
-}
-
-nav a:hover {
-  text-decoration: underline;
+  font-family: var(--font-inter), system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  background: radial-gradient(120% 140% at 15% -10%, var(--bg-page-2) 0%, var(--bg-page) 55%) fixed;
+  color: var(--text-primary);
+  min-height: 100vh;
 }
 
 main {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 16px;
+  display: block;
 }
 
+::selection {
+  background: var(--accent-soft);
+  color: var(--text-primary);
+}
+
+/* scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-glass-strong);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-soft);
+}
 
 /* Global styles for react-calendar-heatmap */
 .react-calendar-heatmap {
@@ -35,7 +93,7 @@ main {
 
 .react-calendar-heatmap text {
   font-size: 10px;
-  fill: #718096;
+  fill: var(--text-muted);
 }
 
 .react-calendar-heatmap .react-calendar-heatmap-small-text {
@@ -43,12 +101,12 @@ main {
 }
 
 .react-calendar-heatmap rect:hover {
-  stroke: #4a5568;
+  stroke: var(--accent);
   stroke-width: 1px;
 }
 
 /* Override weekday labels */
 .react-calendar-heatmap .react-calendar-heatmap-weekday-label {
   font-size: 9px;
-  fill: #718096;
+  fill: var(--text-muted);
 }

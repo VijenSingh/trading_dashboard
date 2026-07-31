@@ -20,7 +20,7 @@ export async function GET(req) {
     const { searchParams } = new URL(req.url);
     const strategy = searchParams.get('strategy');
     const query = strategy ? { strategy } : {};
-    const trades = await Trade.find(query);
+    const trades = await Trade.find(query).sort({ date: 1 }).lean();
     return new Response(JSON.stringify(trades), { status: 200 });
   } catch (err) {
     console.error(err);

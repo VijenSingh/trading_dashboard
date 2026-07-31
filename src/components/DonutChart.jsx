@@ -14,10 +14,11 @@ import UseAllStrategiesData from "@/components/UseAllStrategiesData";
 import styles from "../css/DonutChart.module.css";
 import useStrategyName from "@/components/useStrategyName";
 
+// First 8 are the validated dark-mode categorical palette; the rest extend it
+// for the 14 strategies (past 8, adjacent-pair CVD separation is no longer guaranteed).
 const COLORS = [
-  "#00FFFF", "#36A2EB", "#FFCE56", "#8fce00", "#FF69B4",
-  "#FF3C33", "#581845", "#4F5F52", "#0A4949", "#F1820C",
-  "#9C27B0", "#3F51B5", "#009688", "#8BC34A", "#FFC107"
+  "#3987e5", "#d95926", "#199e70", "#c98500", "#d55181", "#008300", "#9085e9", "#e66767",
+  "#3ec7d1", "#f0a45e", "#7fd858", "#c084fc", "#f472b6", "#5eead4",
 ];
 
 const renderActiveShape = (props) => {
@@ -52,7 +53,6 @@ const DonutChartRecharts = ({ title }) => {
     originalValue: Number(data[key]),
   }));
 
-  console.log("55=> ", data)
   const totalValue = chartData.reduce((sum, item) => sum + item.value, 0);
 
   const CustomTooltip = ({ active, payload }) => {
@@ -113,6 +113,7 @@ const DonutChartRecharts = ({ title }) => {
                 percent > 0.05 ? `${(percent * 100).toFixed(0)}%` : ""
               }
               labelLine={false}
+              fill="#ffffff"
               activeIndex={activeIndex}
               activeShape={renderActiveShape}
               onMouseEnter={(_, index) => setActiveIndex(index)}

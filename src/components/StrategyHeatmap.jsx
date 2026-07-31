@@ -98,16 +98,19 @@ const StrategyHeatmap = ({ data, strategy, years }) => {
                   if (pnl > 0) cellClass = styles.profit;
                   if (pnl < 0) cellClass = styles.loss;
 
+                  const tooltipText =
+                    pnl !== 0
+                      ? `${dateStr} → $${pnl.toFixed(2)}`
+                      : `${dateStr} → No Trades`;
+
                   return (
                     <div
                       key={dateStr}
                       className={`${styles.dayCell} ${cellClass}`}
+                      title={tooltipText}
+                      tabIndex={0}
                     >
-                      <span className={styles.tooltip}>
-                        {pnl !== 0
-                          ? `${dateStr} → $${pnl.toFixed(2)}`
-                          : `${dateStr} → No Trades`}
-                      </span>
+                      <span className={styles.tooltip}>{tooltipText}</span>
                     </div>
                   );
                 })}

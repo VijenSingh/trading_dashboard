@@ -1,13 +1,16 @@
 import "./globals.css";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+
+export const metadata = {
+  title: "Portfolio Performance Dashboard",
+};
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="dark" className={inter.variable}>
       <body>
-        {/* <nav>
-          <a href="/">Home</a>
-          <a href="/trades">Trades</a>
-        </nav> */}
         <main>{children}</main>
       </body>
     </html>

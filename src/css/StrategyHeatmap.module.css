@@ -1,50 +1,61 @@
 /* Container */
 .container {
-  padding: 20px;
+  background: var(--surface-glass);
+  backdrop-filter: var(--blur-glass);
+  -webkit-backdrop-filter: var(--blur-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-glass);
+  padding: 1.5rem;
 }
 
 /* Title */
 .title {
-  font-size: 1.5rem;
-  margin-bottom: 15px;
-  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
   text-align: center;
+  color: var(--text-primary);
 }
 
 /* Year Tabs */
 .yearTabs {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
 }
 
 .yearTab {
   padding: 6px 14px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  background: #f8f8f8;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-glass-strong);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-secondary);
   cursor: pointer;
-  font-size: 14px;
+  font-size: 0.85rem;
   transition: all 0.2s ease;
 }
 
 .yearTab:hover {
-  background: #eaeaea;
+  background: rgba(255, 255, 255, 0.09);
+  color: var(--text-primary);
 }
 
 .activeTab {
-  background: #0070f3;
+  background: linear-gradient(120deg, var(--accent), var(--accent-blue));
   color: white;
-  border-color: #0070f3;
-  font-weight: bold;
+  border-color: transparent;
+  font-weight: 600;
+  box-shadow: 0 4px 14px rgba(144, 133, 233, 0.35);
 }
 
 /* Heatmap Grid (all months) */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
+  gap: 1rem;
 }
 
 /* Month Card */
@@ -52,19 +63,19 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border: 1px solid #ddd;
-  border-radius: 10px;
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
   padding: 10px;
-  background: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  background: rgba(255, 255, 255, 0.03);
   min-height: 240px; /* consistent look */
 }
 
 /* Month Label */
 .monthLabel {
-  font-weight: bold;
+  font-weight: 600;
   margin-bottom: 8px;
   text-align: center;
+  color: var(--text-primary);
 }
 
 /* Days Grid */
@@ -84,17 +95,24 @@
   position: relative;
   cursor: pointer;
   flex-shrink: 0;     /* stop shrinking */
+  transition: transform 0.15s ease;
+}
+
+.dayCell:hover {
+  transform: scale(1.15);
+  z-index: 1;
 }
 
 /* Tooltip */
 .tooltip {
   visibility: hidden;
   width: max-content;
-  background-color: rgba(0,0,0,0.8);
-  color: #fff;
+  background-color: rgba(20, 18, 30, 0.95);
+  border: 1px solid var(--border-glass-strong);
+  color: var(--text-primary);
   text-align: center;
   padding: 4px 8px;
-  border-radius: 4px;
+  border-radius: 6px;
   position: absolute;
   z-index: 10;
   bottom: 125%;
@@ -103,46 +121,54 @@
   font-size: 12px;
   white-space: nowrap;
   opacity: 0;
-  transition: opacity 0.3s;
+  transition: opacity 0.2s;
 }
 
-.dayCell:hover .tooltip {
+.dayCell:hover .tooltip,
+.dayCell:focus-visible .tooltip {
   visibility: visible;
   opacity: 1;
 }
 
+.dayCell:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
 /* Colors */
 .noData {
-  background: #f0f0f0;
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .profit {
-  background: #4caf50; /* green */
+  background: var(--profit-strong);
+  box-shadow: 0 0 8px rgba(34, 224, 111, 0.45);
 }
 
 .loss {
-  background: #f44336; /* red */
+  background: var(--loss-strong);
+  box-shadow: 0 0 8px rgba(255, 92, 104, 0.45);
 }
 
 /* Month Totals */
 .monthProfit,
 .monthLoss {
-  font-weight: bold;
+  font-weight: 700;
   text-align: center;
 }
 
 .monthProfit {
-  color: green;
+  color: var(--profit-strong);
 }
 
 .monthLoss {
-  color: red;
+  color: var(--loss-strong);
 }
-
 
 .monthStats {
   text-align: center;
   margin-top: 6px;
   font-size: 13px;
-  line-height: 1.3;
+  line-height: 1.4;
+  color: var(--text-muted);
 }

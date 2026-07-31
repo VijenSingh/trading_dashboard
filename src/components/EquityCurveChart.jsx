@@ -10,60 +10,60 @@ import {
   CartesianGrid,
   ResponsiveContainer,
 } from "recharts";
+import { parseLocalDate } from "@/lib/date";
+import styles from "../css/EquityCurveChart.module.css";
 
 function EquityCurveChart({ equityData }) {
   if (!equityData || equityData.length === 0) {
     return (
-      <div className="w-full mt-6 px-3">
-        <div className="bg-gray-100 rounded-lg p-8 text-center">
-          <p className="text-gray-500 text-lg">No data available</p>
-        </div>
+      <div className={styles.empty}>
+        <p className={styles.emptyText}>No data available</p>
       </div>
     );
   }
 
   return (
-    <div className="w-full mt-6 px-3">
-      <h3 className="text-center mb-4 text-xl font-semibold text-gray-800">
-        📈 Equity Curve
-      </h3>
-      <div className="w-full rounded-xl border border-gray-200 bg-gradient-to-br from-white to-gray-50 p-4 shadow-md transition-all hover:shadow-lg">
+    <div className={styles.wrap}>
+      <h3 className={styles.heading}>📈 Equity Curve</h3>
+      <div className={styles.card}>
         <ResponsiveContainer width="100%" height={380}>
           <LineChart data={equityData}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
+            <CartesianGrid strokeDasharray="3 3" stroke="#2c2c2a" />
             <XAxis
               dataKey="date"
               tickFormatter={(date) =>
-                new Date(date).toLocaleDateString("en-GB")
+                parseLocalDate(date).toLocaleDateString("en-GB")
               }
               angle={-35}
               textAnchor="end"
-              tick={{ fontSize: 12, fill: "#6B7280" }}
+              tick={{ fontSize: 12, fill: "#898781" }}
               height={60}
             />
             <YAxis
-              tick={{ fontSize: 12, fill: "#6B7280" }}
+              tick={{ fontSize: 12, fill: "#898781" }}
               tickFormatter={(val) => `$${val}`}
             />
             <Tooltip
               formatter={(value) => [`$${value}`, "Cumulative P/L"]}
               labelFormatter={(label) =>
-                `Date: ${new Date(label).toLocaleDateString("en-GB")}`
+                `Date: ${parseLocalDate(label).toLocaleDateString("en-GB")}`
               }
               contentStyle={{
-                backgroundColor: "#fff",
-                borderRadius: "8px",
-                boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-                border: "1px solid #e5e7eb",
+                backgroundColor: "rgba(20, 18, 30, 0.92)",
+                borderRadius: "10px",
+                boxShadow: "0 8px 24px rgba(0,0,0,0.45)",
+                border: "1px solid rgba(255,255,255,0.14)",
+                color: "#ffffff",
               }}
+              labelStyle={{ color: "#c3c2b7" }}
             />
             <Line
               type="monotone"
               dataKey="cumulativePL"
-              stroke="#4B70C0"
+              stroke="#3987e5"
               strokeWidth={3}
               dot={false}
-              activeDot={{ r: 6, stroke: "#1D4ED8", strokeWidth: 2 }}
+              activeDot={{ r: 6, stroke: "#9085e9", strokeWidth: 2 }}
             />
           </LineChart>
         </ResponsiveContainer>

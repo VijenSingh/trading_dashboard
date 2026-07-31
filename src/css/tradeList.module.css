@@ -1,59 +1,157 @@
 /* TradeList.module.css */
 
 .tradeList {
-  background-color: #fff;
-  border-radius: 12px;
+  background: var(--surface-glass);
+  backdrop-filter: var(--blur-glass);
+  -webkit-backdrop-filter: var(--blur-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
   padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  margin-bottom: 2rem;
+  box-shadow: var(--shadow-glass);
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-glass);
 }
 
 .title {
-  font-size: 1.8rem;
+  font-size: 1.3rem;
   font-weight: 700;
-  color: #2d3748;
-  margin-bottom: 1.5rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 2px solid #e2e8f0;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.exportButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-glass-strong);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.exportButton:hover:not(:disabled) {
+  background: var(--accent-soft);
+  color: var(--text-primary);
+  border-color: var(--accent);
+}
+
+.exportButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.exportIcon {
+  width: 15px;
+  height: 15px;
+}
+
+.filterBar {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.filterField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.filterField label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.filterField input {
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--border-glass-strong);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+  color-scheme: dark;
+  font-size: 0.85rem;
+}
+
+.filterField input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.clearFilterButton {
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-glass);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.clearFilterButton:hover {
+  color: var(--text-primary);
 }
 
 .tableContainer {
   overflow-x: auto;
   margin-bottom: 1.5rem;
+  border-radius: var(--radius-sm);
 }
 
 .tradeTable {
   width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
 .tradeTable th {
-  background-color: #f8fafc;
+  background-color: rgba(255, 255, 255, 0.04);
   padding: 0.75rem 1rem;
   text-align: left;
   font-weight: 600;
-  color: #4a5568;
-  border-bottom: 2px solid #e2e8f0;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-glass);
+  white-space: nowrap;
 }
 
 .tradeTable td {
   padding: 0.75rem 1rem;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid var(--border-glass);
+  color: var(--text-primary);
 }
 
-.tradeTable tr:hover {
-  background-color: #f7fafc;
+.tradeTable tr:hover td {
+  background-color: rgba(255, 255, 255, 0.03);
 }
 
 .profit {
-  color: #38a169;
+  color: var(--profit-strong);
   font-weight: 600;
 }
 
 .loss {
-  color: #e53e3e;
+  color: var(--loss-strong);
   font-weight: 600;
 }
 
@@ -63,38 +161,38 @@
 }
 
 .editButton {
-  background-color: #3182ce;
-  color: white;
-  border: none;
+  background-color: rgba(57, 135, 229, 0.15);
+  color: #7db3f2;
+  border: 1px solid rgba(57, 135, 229, 0.3);
   padding: 0.4rem 0.75rem;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  font-size: 0.85rem;
-  transition: background-color 0.2s;
+  font-size: 0.82rem;
+  transition: all 0.2s;
 }
 
 .editButton:hover {
-  background-color: #2c5282;
+  background-color: rgba(57, 135, 229, 0.28);
 }
 
 .deleteButton {
-  background-color: #e53e3e;
-  color: white;
-  border: none;
+  background-color: var(--loss-soft);
+  color: var(--loss-strong);
+  border: 1px solid rgba(255, 92, 104, 0.3);
   padding: 0.4rem 0.75rem;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  font-size: 0.85rem;
-  transition: background-color 0.2s;
+  font-size: 0.82rem;
+  transition: all 0.2s;
 }
 
 .deleteButton:hover {
-  background-color: #c53030;
+  background-color: rgba(255, 92, 104, 0.26);
 }
 
 .noTrades {
   text-align: center;
-  color: #a0aec0;
+  color: var(--text-muted);
   font-style: italic;
   padding: 2rem;
 }
@@ -106,66 +204,72 @@
   align-items: center;
   margin: 1.5rem 0;
   gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .navButton {
-  background-color: #edf2f7;
-  border: 1px solid #e2e8f0;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass);
+  color: var(--text-secondary);
   padding: 0.5rem 1rem;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   font-weight: 500;
   transition: all 0.2s;
 }
 
 .navButton:hover:not(:disabled) {
-  background-color: #e2e8f0;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
 }
 
 .navButton:disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
 .pageButton {
   padding: 0.5rem 0.75rem;
-  border: 1px solid #e2e8f0;
-  background-color: white;
-  border-radius: 6px;
+  border: 1px solid var(--border-glass);
+  background-color: rgba(255, 255, 255, 0.03);
+  color: var(--text-secondary);
+  border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .pageButton:hover {
-  background-color: #edf2f7;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
 }
 
 .activePage {
-  background-color: #4299e1;
+  background: linear-gradient(120deg, var(--accent), var(--accent-blue));
   color: white;
-  border-color: #4299e1;
+  border-color: transparent;
 }
 
 .activePage:hover {
-  background-color: #3182ce;
+  background: linear-gradient(120deg, var(--accent-strong), var(--accent-blue));
+  color: white;
 }
 
 .pageEllipsis {
   padding: 0.5rem;
-  color: #a0aec0;
+  color: var(--text-muted);
 }
 
 /* Equity Curve Section */
 .equitySection {
   margin-top: 2rem;
   padding-top: 1.5rem;
-  border-top: 2px solid #e2e8f0;
+  border-top: 1px solid var(--border-glass);
 }
 
 .equityTitle {
-  font-size: 1.4rem;
+  font-size: 1.15rem;
   font-weight: 600;
-  color: #2d3748;
+  color: var(--text-primary);
   margin-bottom: 1rem;
 }
 
@@ -176,7 +280,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(5, 5, 10, 0.65);
+  backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -185,20 +290,23 @@
 }
 
 .modalContent {
-  background-color: white;
-  border-radius: 12px;
+  background: var(--surface-glass-strong);
+  backdrop-filter: var(--blur-glass);
+  -webkit-backdrop-filter: var(--blur-glass);
+  border: 1px solid var(--border-glass-strong);
+  border-radius: var(--radius-lg);
   padding: 1.5rem;
   width: 100%;
   max-width: 500px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-glass-lg);
 }
 
 .modalTitle {
-  font-size: 1.5rem;
+  font-size: 1.35rem;
   font-weight: 600;
-  color: #2d3748;
+  color: var(--text-primary);
   margin-bottom: 1.5rem;
 }
 
@@ -216,21 +324,25 @@
 
 .formLabel {
   font-weight: 500;
-  color: #4a5568;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
 }
 
 .formInput {
   padding: 0.75rem;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
+  border: 1px solid var(--border-glass-strong);
+  border-radius: var(--radius-sm);
   font-size: 1rem;
+  background-color: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+  color-scheme: dark;
   transition: border-color 0.2s;
 }
 
 .formInput:focus {
   outline: none;
-  border-color: #4299e1;
-  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
 .modalActions {
@@ -241,33 +353,36 @@
 }
 
 .cancelButton {
-  background-color: #e2e8f0;
-  color: #4a5568;
-  border: none;
+  background-color: rgba(255, 255, 255, 0.06);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-glass);
   padding: 0.75rem 1.5rem;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   font-weight: 500;
   transition: background-color 0.2s;
 }
 
 .cancelButton:hover {
-  background-color: #cbd5e0;
+  background-color: rgba(255, 255, 255, 0.12);
+  color: var(--text-primary);
 }
 
 .saveButton {
-  background-color: #4299e1;
+  background: linear-gradient(120deg, var(--accent), var(--accent-blue));
   color: white;
   border: none;
   padding: 0.75rem 1.5rem;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   font-weight: 500;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
+  box-shadow: 0 6px 18px rgba(144, 133, 233, 0.35);
 }
 
 .saveButton:hover {
-  background-color: #3182ce;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(144, 133, 233, 0.5);
 }
 
 /* Responsive Design */
@@ -275,23 +390,23 @@
   .tradeList {
     padding: 1rem;
   }
-  
+
   .title {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
-  
+
   .actionButtons {
     flex-direction: column;
   }
-  
+
   .pagination {
     flex-wrap: wrap;
   }
-  
+
   .modalContent {
     padding: 1rem;
   }
-  
+
   .modalActions {
     flex-direction: column;
   }

@@ -106,6 +106,7 @@ const RankedStrategies = () => {
               <input
                 type="text"
                 placeholder="Search strategies..."
+                aria-label="Search strategies"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -113,6 +114,7 @@ const RankedStrategies = () => {
 
             <select
               className={styles.timeFilter}
+              aria-label="Filter by time range"
               value={timeFilter}
               onChange={(e) => setTimeFilter(e.target.value)}
             >
@@ -128,47 +130,38 @@ const RankedStrategies = () => {
           <table className={styles.table}>
             <thead>
               <tr>
-                <th onClick={() => handleSort("index")}>Rank</th>
-                <th onClick={() => handleSort("strategy")}>
-                  Strategy
-                  {sortBy === "strategy" && (
-                    <span className={styles.sortArrow}>
-                      {sortOrder === "asc" ? "▲" : "▼"}
-                    </span>
-                  )}
-                </th>
-                <th onClick={() => handleSort("profit")}>
-                  Profit
-                  {sortBy === "profit" && (
-                    <span className={styles.sortArrow}>
-                      {sortOrder === "asc" ? "▲" : "▼"}
-                    </span>
-                  )}
-                </th>
-                <th onClick={() => handleSort("change")}>
-                  Change
-                  {sortBy === "change" && (
-                    <span className={styles.sortArrow}>
-                      {sortOrder === "asc" ? "▲" : "▼"}
-                    </span>
-                  )}
-                </th>
-                <th onClick={() => handleSort("trades")}>
-                  Trades
-                  {sortBy === "trades" && (
-                    <span className={styles.sortArrow}>
-                      {sortOrder === "asc" ? "▲" : "▼"}
-                    </span>
-                  )}
-                </th>
-                <th onClick={() => handleSort("winRate")}>
-                  Win&nbsp;Rate
-                  {sortBy === "winRate" && (
-                    <span className={styles.sortArrow}>
-                      {sortOrder === "asc" ? "▲" : "▼"}
-                    </span>
-                  )}
-                </th>
+                {[
+                  { key: "index", label: "Rank" },
+                  { key: "strategy", label: "Strategy" },
+                  { key: "profit", label: "Profit" },
+                  { key: "change", label: "Change" },
+                  { key: "trades", label: "Trades" },
+                  { key: "winRate", label: "Win Rate" },
+                ].map(({ key, label }) => {
+                  const isSorted = sortBy === key;
+                  return (
+                    <th
+                      key={key}
+                      onClick={() => handleSort(key)}
+                      tabIndex={0}
+                      role="button"
+                      aria-sort={isSorted ? (sortOrder === "asc" ? "ascending" : "descending") : "none"}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          handleSort(key);
+                        }
+                      }}
+                    >
+                      {label}
+                      {isSorted && (
+                        <span className={styles.sortArrow}>
+                          {sortOrder === "asc" ? "▲" : "▼"}
+                        </span>
+                      )}
+                    </th>
+                  );
+                })}
               </tr>
             </thead>
 

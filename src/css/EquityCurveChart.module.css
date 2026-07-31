@@ -1,0 +1,43 @@
+.wrap {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 0 0.25rem;
+}
+
+.heading {
+  text-align: center;
+  margin: 0 0 1rem 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.card {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-glass);
+  background: var(--surface-glass);
+  backdrop-filter: var(--blur-glass);
+  -webkit-backdrop-filter: var(--blur-glass);
+  padding: 1rem;
+  box-shadow: var(--shadow-glass);
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-glass-lg);
+}
+
+.empty {
+  background: var(--surface-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  text-align: center;
+}
+
+.emptyText {
+  color: var(--text-muted);
+  font-size: 1rem;
+  margin: 0;
+}

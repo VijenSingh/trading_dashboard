@@ -10,6 +10,7 @@ import {
   ResponsiveContainer,
   Cell,
 } from "recharts";
+import { parseLocalDate } from "@/lib/date";
 import styles from "../css/PerformanceTables.module.css";
 
 const PerformanceTables = ({ trades }) => {
@@ -40,7 +41,7 @@ const PerformanceTables = ({ trades }) => {
   const monthData = useMemo(() => {
     const grouped = {};
     data.forEach(({ date, pnl }) => {
-      const d = new Date(date);
+      const d = parseLocalDate(date);
       const month = d.getMonth();
       if (!grouped[month]) grouped[month] = [];
       grouped[month].push(pnl);
@@ -60,7 +61,7 @@ const PerformanceTables = ({ trades }) => {
   const dayData = useMemo(() => {
     const grouped = {};
     data.forEach(({ date, pnl }) => {
-      const d = new Date(date);
+      const d = parseLocalDate(date);
       const day = d.getDay();
       if (!grouped[day]) grouped[day] = [];
       grouped[day].push(pnl);
@@ -111,15 +112,25 @@ const PerformanceTables = ({ trades }) => {
         <div className={styles.chartWrapper}>
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={monthData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="month" />
-              <YAxis />
-              <Tooltip formatter={(value) => [`$${value}`, "Value"]} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#2c2c2a" />
+              <XAxis dataKey="month" tick={{ fontSize: 12, fill: "#898781" }} />
+              <YAxis tick={{ fontSize: 12, fill: "#898781" }} />
+              <Tooltip
+                formatter={(value) => [`$${value}`, "Value"]}
+                contentStyle={{
+                  backgroundColor: "rgba(20, 18, 30, 0.92)",
+                  borderRadius: "10px",
+                  border: "1px solid rgba(255,255,255,0.14)",
+                  color: "#ffffff",
+                }}
+                labelStyle={{ color: "#c3c2b7" }}
+                cursor={{ fill: "rgba(255,255,255,0.04)" }}
+              />
               <Bar dataKey="totalReturn">
                 {monthData.map((entry, index) => (
                   <Cell
                     key={`cell-${index}`}
-                    fill={entry.totalReturn >= 0 ? "#38a169" : "#e53e3e"}
+                    fill={entry.totalReturn >= 0 ? "#22e06f" : "#ff5c68"}
                   />
                 ))}
               </Bar>
@@ -160,15 +171,25 @@ const PerformanceTables = ({ trades }) => {
         <div className={styles.chartWrapper}>
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={dayData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="day" />
-              <YAxis />
-              <Tooltip formatter={(value) => [`$${value}`, "Value"]} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#2c2c2a" />
+              <XAxis dataKey="day" tick={{ fontSize: 12, fill: "#898781" }} />
+              <YAxis tick={{ fontSize: 12, fill: "#898781" }} />
+              <Tooltip
+                formatter={(value) => [`$${value}`, "Value"]}
+                contentStyle={{
+                  backgroundColor: "rgba(20, 18, 30, 0.92)",
+                  borderRadius: "10px",
+                  border: "1px solid rgba(255,255,255,0.14)",
+                  color: "#ffffff",
+                }}
+                labelStyle={{ color: "#c3c2b7" }}
+                cursor={{ fill: "rgba(255,255,255,0.04)" }}
+              />
               <Bar dataKey="totalReturn">
                 {dayData.map((entry, index) => (
                   <Cell
                     key={`cell-${index}`}
-                    fill={entry.totalReturn >= 0 ? "#38a169" : "#e53e3e"}
+                    fill={entry.totalReturn >= 0 ? "#22e06f" : "#ff5c68"}
                   />
                 ))}
               </Bar>

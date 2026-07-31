@@ -1,0 +1,224 @@
+.wrap {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 0 0.25rem;
+}
+
+.empty {
+  background: var(--surface-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  text-align: center;
+}
+
+.emptyText {
+  color: var(--text-muted);
+  font-size: 1rem;
+  margin: 0;
+}
+
+.topRow {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .topRow {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.heading {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.infoBtn {
+  background: none;
+  border: none;
+  color: var(--accent);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem;
+  border-radius: 50%;
+  transition: background 0.2s ease;
+}
+
+.infoBtn:hover {
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+}
+
+.infoIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.selectWrap {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.selectLabel {
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.select {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--border-glass-strong);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+  color-scheme: dark;
+  outline: none;
+}
+
+.select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.explanation {
+  margin-bottom: 1.5rem;
+  background: var(--accent-soft);
+  padding: 1.1rem 1.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(144, 133, 233, 0.3);
+}
+
+.explanationTitle {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.75rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.98rem;
+}
+
+.explanationIcon {
+  width: 18px;
+  height: 18px;
+  color: var(--accent-strong);
+}
+
+.explanationGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+@media (min-width: 768px) {
+  .explanationGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.legendLabel {
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  color: var(--text-primary);
+  margin: 0 0 0.2rem 0;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  display: inline-block;
+}
+
+.legendDesc {
+  margin: 0 0 0 1.5rem;
+}
+
+.proTip {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.chartCard {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-glass);
+  background: var(--surface-glass);
+  backdrop-filter: var(--blur-glass);
+  -webkit-backdrop-filter: var(--blur-glass);
+  padding: 1rem;
+  box-shadow: var(--shadow-glass);
+  transition: box-shadow 0.3s ease;
+}
+
+.chartCard:hover {
+  box-shadow: var(--shadow-glass-lg);
+}
+
+.tooltip {
+  background: rgba(20, 18, 30, 0.94);
+  backdrop-filter: var(--blur-glass);
+  -webkit-backdrop-filter: var(--blur-glass);
+  padding: 1rem;
+  border: 1px solid var(--border-glass-strong);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-glass-lg);
+}
+
+.tooltipLabel {
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
+}
+
+.tooltipRows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.tooltipRow {
+  display: flex;
+  align-items: center;
+  font-size: 0.85rem;
+}
+
+.tooltipSwatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 0.5rem;
+  border-radius: 50%;
+}
+
+.tooltipName {
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.tooltipValue {
+  margin-left: 0.25rem;
+  color: var(--text-primary);
+}
